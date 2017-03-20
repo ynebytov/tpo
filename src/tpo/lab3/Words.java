@@ -7,6 +7,10 @@ public class Words {
     Location location;
     String words;
 
+    public Words(String words) {
+        this.words = words;
+    }
+
     public void setWords(String words) {
        this.words = words; //"А у меня, кажется, большие проблемы с образом жизни";
     }

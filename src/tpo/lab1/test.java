@@ -11,6 +11,10 @@ public class test {
         RadixSorter rs = new RadixSorter();
         rs.sort(array, 3);
         Utils.printArray(array);
-    }
 
+        array = new int[]{1, 28, 76, 345, 35};
+        Utils.printArray(array);
+        rs.sort(array, 2);
+        Utils.printArray(array);
+    }
 }

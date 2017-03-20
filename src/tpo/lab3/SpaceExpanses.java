@@ -6,4 +6,8 @@ package tpo.lab3;
 public class SpaceExpanses {
     Location location;
     Boolean almostEndless;
+
+    public void send(Words text, Galaxy dst) {
+        dst.recive(text);
+    }
 }

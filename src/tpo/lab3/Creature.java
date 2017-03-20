@@ -16,8 +16,6 @@ public class Creature {
     }
 
     public Words talk(String speech){
-        Words text = new Words();
-        text.setWords(speech);
-        return text;
+        return new Words(speech);
     }
 }
