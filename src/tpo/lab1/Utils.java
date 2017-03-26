@@ -8,19 +8,8 @@ import java.util.HashMap;
  */
 public class Utils {
 
-    static HashMap<Integer, BigInteger> cache = new HashMap<>();
-
-    public static BigInteger factorial(int x) {
-        BigInteger ret;
-
-        if (x == 0) return BigInteger.ONE;
-        if (null != (ret = cache.get(x))) return ret;
-        ret = BigInteger.valueOf(x).multiply(factorial(x-1));
-        cache.put(x, ret);
-        return ret;
-    }
-
     public static Double round(double x, int n) {
+        if (Double.isNaN(x) || Double.isInfinite(x)) return x;
         for (int i = 0; i++ < n; x = x*10);
         x = Math.round(x);
         for (int i = 0; i++ < n; x = x/10);
