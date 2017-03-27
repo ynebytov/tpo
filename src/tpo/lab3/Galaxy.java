@@ -26,4 +26,8 @@ public class Galaxy {
     public void addCreatures(Creature a) {
         Creatures.add(a);
     }
+
+    public ArrayList getCreatures() {
+        return Creatures;
+    }
 }

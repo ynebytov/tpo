@@ -5,4 +5,9 @@ package tpo.lab3;
  */
 public class Star {
     Location location;
+    String name;
+
+    public Star(String sun) {
+        this.name = sun;
+    }
 }

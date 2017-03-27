@@ -6,6 +6,7 @@ package tpo.lab3;
 public class Hole {
 
     private String state;
+    String how = "далеко-далеко во времени";
 
     public Hole(String state) {
         this.state = state;

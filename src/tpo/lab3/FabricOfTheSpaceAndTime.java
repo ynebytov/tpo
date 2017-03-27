@@ -17,6 +17,7 @@ public class FabricOfTheSpaceAndTime {
     private static Galaxy firstGalaxy = new Galaxy(new Location());
     private static Galaxy secondGalaxy = new Galaxy(new Location());
     private static SpaceExpanses se = new SpaceExpanses();
+    private static Star firstStar = new Star("Sun");
 
     static Hole openRandomHole(){
         return new Hole("Random");
@@ -26,7 +27,11 @@ public class FabricOfTheSpaceAndTime {
 
         firstGalaxy.addCreatures(Arthur);
         for (int i = 0; i < 5; i++) {
-            secondGalaxy.addCreatures(new Creature());
+            secondGalaxy.addCreatures(new Creature(firstStar, true, true));
+        }
+
+        for (int i = 0; i < 5; i++) {
+
         }
 
         openRandomHole().transfer(

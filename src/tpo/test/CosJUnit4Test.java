@@ -14,7 +14,7 @@ import static junit.framework.Assert.fail;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Created by nebyt on 19.03.2017.
+ * Created by nebyt on 19.03.2017. проверка точности
  */
 public class CosJUnit4Test {
 
