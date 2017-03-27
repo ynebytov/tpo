@@ -1,10 +1,16 @@
 package tpo.test;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import tpo.lab1.Utils;
 import tpo.lab1.mCOS;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -12,20 +18,60 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class CosJUnit4Test {
 
+    private HashMap<Double, Double> basicTests = new HashMap<Double, Double>();
+    private int accuracy = 6;
+
+    @Before
+    public void setup() {
+        //Infinity & NaN
+        basicTests.put(Double.NaN, Math.cos(Double.NaN));
+        basicTests.put(Double.NEGATIVE_INFINITY, Math.cos(Double.NEGATIVE_INFINITY));
+        basicTests.put(Double.POSITIVE_INFINITY, Math.cos(Double.NEGATIVE_INFINITY));
+
+        //For basic & parity
+        for (double i = 0; i < 2*Math.PI; i += 0.000_01) {
+            basicTests.put(i, Utils.round(Math.cos(i), accuracy));
+        }
+    }
+
     @Test
     public void CosTest() {
-        assertEquals(Math.cos(Double.NaN), mCOS.cos(Double.NaN));
-        assertEquals(Math.cos(Double.NEGATIVE_INFINITY), mCOS.cos(Double.NEGATIVE_INFINITY));
-        assertEquals(Math.cos(Double.POSITIVE_INFINITY), mCOS.cos(Double.POSITIVE_INFINITY));
+        double expected, value, result, parityResult, periodicityResult;
+        for (Map.Entry entry : basicTests.entrySet()) {
+            //Get testing values
+            value = (double) entry.getKey();
+            expected = (double) entry.getValue();
+            result = Utils.round(mCOS.cos(value), accuracy);
+            parityResult = Utils.round(mCOS.cos(-value), accuracy);
+            periodicityResult = Utils.round(mCOS.cos(value + Math.PI*2), accuracy);
 
-        int acc = 5;
-        for (double i = -3 * Math.PI / 2; i < 3 * Math.PI / 2; i += 0.00001) {
-            assertEquals(Utils.round(Math.cos(i), acc), Utils.round(mCOS.cos(i), acc));
+            //Expected result test
+            assertEquals("Not Equal result", expected, result);
+            //Parity test
+            assertEquals("Is Not Parity", expected, parityResult);
+            //Periodicity test
+            assertEquals("Is Not Periodicity",expected, periodicityResult);
+
+            if (Double.isNaN(value) || Double.isInfinite(value)) {
+                continue;
+            }
+            //
+            if(!(result <= 1.0 && result >= -1.0)) {
+                fail("Fail with ".concat(String.valueOf(result)));
+            }
+            //
+            if (value > -Math.PI/2 && value < Math.PI/2) {
+                assertTrue(result > 0);
+            }
+            //
+            if (value > Math.PI/2 && value < Math.PI*3/2) {
+                assertTrue(result < 0);
+            }
         }
     }
 
     @After
-    public void tearDown() {
-        System.out.println("All tests passed");
+    public void clear() {
+        basicTests = null;
     }
 }
