@@ -22,4 +22,8 @@ public class Galaxy {
     public void recive(Words text) {
         this.textList.add(text);
     }
+
+    public void addCreatures(Creature a) {
+        Creatures.add(a);
+    }
 }
