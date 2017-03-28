@@ -7,7 +7,7 @@ public class test {
 
     public static void main(String[] args) {
         RadixSorter rs = new RadixSorter();
-        int[]array = new int[]{4, 24, 93, 5, 81, 64, 77};
+        int[]array = new int[]{10, 1000, 10, 100};
         String test = rs.sort(array);
         System.out.println("Test is: \n" + test);
     }

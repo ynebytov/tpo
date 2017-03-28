@@ -60,7 +60,7 @@ public class CosJUnit4Test {
                 fail("Fail with ".concat(String.valueOf(result)));
             }
             //
-            if (value > -Math.PI/2 && value < Math.PI/2) {
+            if ((value > 0 && value < Math.PI/2) || (value > Math.PI*3/2 && value < Math.PI*2)) {
                 assertTrue(result > 0);
             }
             //

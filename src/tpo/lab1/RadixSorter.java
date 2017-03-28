@@ -19,6 +19,7 @@ public class RadixSorter {
 
     public String sort(int[] array) {
         returnValue.delete(0, returnValue.length());
+        boolean replace = true;
         int[] res = new int[array.length];
         for(int i = 1; true; i++) {
             Utils.copyArray(array, res);
@@ -27,7 +28,7 @@ public class RadixSorter {
             for (int k = 0; k < res.length; k++) {
                 digs[res[k]/((int)Math.pow(10,i-1))%10]++;
             }
-            if (digs[0] == array.length) {
+            if (!replace && digs[0] == array.length) {
                 break;
             }
             returnValue.append("\n");
@@ -36,8 +37,13 @@ public class RadixSorter {
             for (int k = 0; k < digs.length - 1; k++) {
                 digs[k+1] += digs[k];
             }
+            replace = false;
             for (int k = res.length - 1; k >= 0; k--) {
-                array[--digs[res[k]/((int)Math.pow(10,i-1))%10]] = res[k];
+                int place = --digs[res[k]/((int)Math.pow(10,i-1))%10];
+                array[place] = res[k];
+                if (place != k) {
+                    replace = true;
+                }
             }
         }
         return returnValue.toString();
