@@ -4,14 +4,19 @@ package tpo.lab3;
  * Created by anastasia on 19.03.17.
  */
 public class Words {
-    Location location;
-    String words;
+    private Creature source;
+    private String words;
 
-    public Words(String words) {
+    public Words(Creature source, String words) {
+        this.source = source;
         this.words = words;
     }
 
-    public void setWords(String words) {
-       this.words = words; //"А у меня, кажется, большие проблемы с образом жизни";
+    public String toString() {
+        return words;
+    }
+
+    public Creature getSource() {
+        return source;
     }
 }

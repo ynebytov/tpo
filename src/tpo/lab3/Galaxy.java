@@ -7,27 +7,32 @@ import java.util.List;
  * Created by anastasia on 19.03.17.
  */
 public class Galaxy {
-    Location location;
-    ArrayList Stars = new ArrayList();
-    ArrayList Creatures = new ArrayList();
-    War war;
-
+    List<Star> stars = new ArrayList<>();
     List<Words> textList = new ArrayList<>();
+    private String type;
 
 
-    public Galaxy(Location location) {
-        this.location = location;
+    public Galaxy(String type) {
+        this.type = type;
+    }
+
+    public Galaxy() {
+
     }
 
     public void recive(Words text) {
         this.textList.add(text);
     }
 
-    public void addCreatures(Creature a) {
-        Creatures.add(a);
+    public String getType() {
+        return type;
     }
 
-    public ArrayList getCreatures() {
-        return Creatures;
+    public List<Star> getStars() {
+        return this.stars;
+    }
+
+    public void addStar(Star star) {
+        this.stars.add(star);
     }
 }

@@ -19,7 +19,7 @@ import static junit.framework.TestCase.assertEquals;
 public class CosJUnit4Test {
 
     private HashMap<Double, Double> basicTests = new HashMap<Double, Double>();
-    private int accuracy = 6;
+    private double accuracy = 1E-10;
 
     @Before
     public void setup() {
@@ -30,7 +30,7 @@ public class CosJUnit4Test {
 
         //For basic & parity
         for (double i = 0; i < 2*Math.PI; i += 0.000_01) {
-            basicTests.put(i, Utils.round(Math.cos(i), accuracy));
+            basicTests.put(i, Math.cos(i));
         }
     }
 
@@ -41,16 +41,16 @@ public class CosJUnit4Test {
             //Get testing values
             value = (double) entry.getKey();
             expected = (double) entry.getValue();
-            result = Utils.round(mCOS.cos(value), accuracy);
-            parityResult = Utils.round(mCOS.cos(-value), accuracy);
-            periodicityResult = Utils.round(mCOS.cos(value + Math.PI*2), accuracy);
+            result = mCOS.cos(value);
+            parityResult = mCOS.cos(-value);
+            periodicityResult = mCOS.cos(value + Math.PI*2);
 
             //Expected result test
-            assertEquals("Not Equal result", expected, result);
+            assertEquals("Not Equal result", expected, result, accuracy);
             //Parity test
-            assertEquals("Is Not Parity", expected, parityResult);
+            assertEquals("Is Not Parity", expected, parityResult, accuracy);
             //Periodicity test
-            assertEquals("Is Not Periodicity",expected, periodicityResult);
+            assertEquals("Is Not Periodicity",expected, periodicityResult, accuracy);
 
             if (Double.isNaN(value) || Double.isInfinite(value)) {
                 continue;

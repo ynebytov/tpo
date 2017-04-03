@@ -1,5 +1,7 @@
 package tpo.lab3;
 
+import java.util.Random;
+
 /**
  * Created by anastasia on 19.03.17.
  *
@@ -13,35 +15,53 @@ package tpo.lab3;
 
 public class FabricOfTheSpaceAndTime {
 
-    private static Creature Arthur = new Creature();;
-    private static Galaxy firstGalaxy = new Galaxy(new Location());
-    private static Galaxy secondGalaxy = new Galaxy(new Location());
-    private static SpaceExpanses se = new SpaceExpanses();
-    private static Star firstStar = new Star("Sun");
+    private Galaxy arthurGalaxy;
+    private Galaxy secondGalaxy;
+    private SpaceExpanses se;
+    private Hole hole;
 
-    static Hole openRandomHole(){
-        return new Hole("Random");
+    private Creature Arthur;
+
+    private Hole openRandomHole(){
+        return new Hole("случайная");
     }
 
-    public static void main(String[] args) {
+    public Creature getArthur() {
+        return Arthur;
+    }
+    public Hole getHole() {
+        return hole;
+    }
 
-        firstGalaxy.addCreatures(Arthur);
-        for (int i = 0; i < 5; i++) {
-            secondGalaxy.addCreatures(new Creature(firstStar, true, true));
+    public FabricOfTheSpaceAndTime() {
+        arthurGalaxy = new Galaxy();
+        secondGalaxy = new Galaxy("далекая галактика");
+        for(String starName : new String[]{"Альдебаран", "Сириус", "Мирфак", "Альтаир"}) {
+            Star star = new Star(starName);
+            Random rd = new Random();
+//            long count = rd.nextInt(100)*50_000;
+//            for(long i = 0; i < count; i++) {
+//                star.addCreature(new Creature(secondGalaxy, rd.nextBoolean(), rd.nextBoolean()));
+//            }
+            for (int i = 0; i < 250_000; i++) {
+                star.addCreature(new Creature(secondGalaxy, true, true));
+            }
+            secondGalaxy.addStar(star);
         }
+        se = new SpaceExpanses();
+        Arthur = new Creature(arthurGalaxy);
 
-        for (int i = 0; i < 5; i++) {
+        Star sun = new Star("Sun");
+        sun.addCreature(Arthur);
+        arthurGalaxy.addStar(sun);
+    }
 
-        }
-
-        openRandomHole().transfer(
+    public void doWork() {
+        this.hole = openRandomHole();
+        this.hole.transfer(
+                "далеко-далеко во времени",
                 Arthur.talk("А у меня, кажется, большие проблемы с образом жизни"),
-                se,
-                secondGalaxy);
-
+                this.se,
+                this.secondGalaxy);
     }
-
-
-
-
 }
