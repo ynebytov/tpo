@@ -32,8 +32,8 @@ public class Hole {
     public void transfer(String transferType, Words talk, SpaceExpanses thr, Galaxy dst) {
         this.lastTransferType = transferType;
         this.lastTransferThrough = thr;
-        this.lastTransferDestination = dst;
         this.lastTransferSource = talk.getSource().getLocation();
+        this.lastTransferDestination = dst;
         this.lastTransferThrough.send(talk, this.lastTransferDestination);
     }
 

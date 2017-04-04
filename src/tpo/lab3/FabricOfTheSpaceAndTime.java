@@ -38,7 +38,7 @@ public class FabricOfTheSpaceAndTime {
         secondGalaxy = new Galaxy("далекая галактика");
         for(String starName : new String[]{"Альдебаран", "Сириус", "Мирфак", "Альтаир"}) {
             Star star = new Star(starName);
-            Random rd = new Random();
+//            Random rd = new Random();
 //            long count = rd.nextInt(100)*50_000;
 //            for(long i = 0; i < count; i++) {
 //                star.addCreature(new Creature(secondGalaxy, rd.nextBoolean(), rd.nextBoolean()));
